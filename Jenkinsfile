@@ -3,5 +3,6 @@ deploySpringBootApp(
     jarName: 'jenkin-0.0.1-SNAPSHOT.jar',
     port: 8081,
     serviceName: 'jenkin-app',
-    healthCheck: '/api'
+    healthCheck: '/api',
+    imageName:'springboot-myfirstDocker'
 )
