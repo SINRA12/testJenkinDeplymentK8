@@ -8,7 +8,7 @@ public class SimpleController {
 
     @GetMapping
     public String getValue() {
-        return "GET: Hard coded value but this time checking the systemd configuration and application is inside a docker container for rollback";
+        return "GET: Hard coded value but this time checking the systemd configuration and application is inside a docker container rollbacktest";
     }
 
     @PostMapping
