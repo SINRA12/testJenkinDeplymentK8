@@ -1,0 +1,65 @@
+# =========================
+# Deployment for Spring Boot
+# =========================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkin-app
+  namespace: default
+  labels:
+    app: jenkin-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkin-app
+  template:
+    metadata:
+      labels:
+        app: jenkin-app
+    spec:
+      containers:
+      - name: jenkin-app
+        # Jenkins will replace this line with a versioned image tag
+        image: sinra12/springboot-myfirstdocker:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8081
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 15
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+
+---
+# =========================
+# Service for Spring Boot
+# =========================
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkin-app-service
+  namespace: default
+spec:
+  selector:
+    app: jenkin-app
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80         # external port
+      targetPort: 8081 # Spring Boot container port
+  type: LoadBalancer
