@@ -20,7 +20,7 @@ public class SimpleController {
 
     @GetMapping
     public String getValue() {
-        return "GET: Hard coded value but this time checking the systemd configuration and application is inside a K8 cluster. " +
+        return "GET: Hard coded value but this time checking the systemd configuration and application is inside a K8 cluster and using ARgo Cd for deployment. " +
                "Server IP: " + getServerIp();
     }
 
