@@ -21,7 +21,7 @@ spec:
       containers:
       - name: jenkin-app
         # Jenkins will replace this line with a versioned image tag
-        image: sinra12/springboot-myfirstdocker:79
+        image: sinra12/springboot-myfirstdocker:80
         imagePullPolicy: Always
         ports:
         - containerPort: 8081
